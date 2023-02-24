@@ -1,0 +1,142 @@
+@import "../../css/colors.scss";
+* {
+  // 배경
+  .main {
+    .clearBtn {
+      position: absolute;
+      top: 3px;
+      right: 38px;
+      color: $mainS;
+      background-color: transparent;
+      .faEraser {
+        font-size: 1.5em;
+        padding: 4px 0 4px 10px;
+      }
+    }
+    .bg {
+      padding-bottom: 180px;
+      width: 100%;
+      background-image: url("../../img/bg-grid.png");
+      padding-top: 0;
+      // 2023년에 읽을 도서
+      .msg {
+        color: $subB;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+    // 도서 추가/삭제 버튼
+    .icon {
+      display: flex;
+
+      gap: 20px;
+      font-size: 3em;
+      color: $mainT;
+      margin-top: 30px;
+      margin-bottom: 50px;
+      align-items: center;
+      .circlePlus.on {
+        color: $subG;
+        pointer-events: none;
+      }
+      .squareMinus.on {
+        color: $subG;
+        pointer-events: none;
+      }
+      .stamp.on {
+        color: $subG;
+        pointer-events: none;
+      }
+    }
+    // 첵 등록 input
+    .registration {
+      display: none;
+      position: relative;
+      margin-bottom: 50px;
+      color: $mainT;
+      input {
+        width: 300px;
+        border: 2px solid $mainT;
+        border-radius: 6px;
+        padding: 10px;
+      }
+      .clearBtn {
+        position: absolute;
+        top: 3px;
+        right: 38px;
+        color: $mainS;
+        background-color: $subW;
+        .faEraser {
+          font-size: 1.5em;
+          padding: 4px 0 4px 10px;
+        }
+      }
+      .inputCloseBtn {
+        color: $mainT;
+        background-color: transparent;
+        .faXmark {
+          font-size: 1.5em;
+          margin-left: 5px;
+        }
+      }
+    }
+    .registration.on {
+      display: block;
+      display: flex;
+      align-items: center;
+    }
+    // category
+    .category {
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+
+      .menu {
+        display: flex;
+        gap: 20px;
+        font-size: 1.2em;
+        color: $mainS;
+        li {
+          cursor: pointer;
+          padding: 10px 0;
+        }
+        .focused {
+          color: $mainT;
+          border-bottom: 2px solid $mainT;
+        }
+      }
+      .search {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: $mainT;
+        .in {
+          display: none;
+          .clearBtn {
+            right: 58px;
+          }
+
+          .searchInput {
+            width: 300px;
+            font-size: 1.2em;
+
+            border: transparent;
+            border-bottom: 2px solid $mainT;
+            padding: 10px;
+            background-color: transparent;
+          }
+        }
+        .in.on {
+          display: block;
+        }
+
+        .faMagnifyingGlass {
+          font-size: 2em;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

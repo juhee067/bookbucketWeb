@@ -1,0 +1,54 @@
+@import "./colors.scss";
+@import url("https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap");
+* {
+  font-family: "Kaisei HarunoUmi", serif;
+  font-family: "Nanum Myeongjo", serif;
+  // outline: 1px solid $mainT;
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  input {
+    outline: none;
+  }
+  // icon cursor
+  .cursor {
+    cursor: pointer;
+  }
+  // button
+  button {
+    border: none;
+  }
+  // 배경
+  .bg {
+    padding: 50px 0;
+    width: 100%;
+    background-image: url("../img/bg-grid.png");
+    // 2023 독서 계획
+    .title {
+      display: flex;
+      gap: 5px;
+      span {
+        color: $subW;
+        background-color: $mainT;
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 25px;
+      }
+      button {
+        background-color: transparent;
+        color: $mainT;
+        font-size: 2em;
+      }
+    }
+  }
+}
