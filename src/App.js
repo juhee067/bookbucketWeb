@@ -21,7 +21,7 @@ function App() {
             <span
               className="cursor"
               onClick={() => {
-                navigate("/bookbucket");
+                navigate("/");
               }}
             >
               2023 독서 계획
@@ -40,7 +40,7 @@ function App() {
       </div>
       <Routes>
         {" "}
-        <Route path="/bookbucket" element={<Main />}></Route>
+        <Route path="/" element={<Main />}></Route>
         <Route path="/bookSearch" element={<BookSearch />}>
           {" "}
         </Route>
