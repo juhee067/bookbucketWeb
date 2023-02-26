@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import book from "../../data/Book";
 import "./main.scss";
 import Entire from "../../component/Entire";
 import Finish from "../../component/Finish";
 import Bookmark from "../../component/Bookmark";
+
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,14 +23,17 @@ import {
 //import { faStar } from "@fortawesome/free-regular-svg-icons";
 const Main = () => {
   // 변수
+  // 경로 이동
+  let navigate = useNavigate();
+  // 정규식
   let pattern = /([^0-9a-zA-Z가-힣\x20])/i;
   // ---usestate
   // plus button
-  let [plusBtn, setPlusBtn] = useState(false);
+  let [isPlusBtnActive, setIsPlusBtnActive] = useState(false);
   // minus button
-  let [minusBtn, setMinusBtn] = useState(false);
+  let [isMinusBtnActive, setIsMinusBtnActive] = useState(false);
   // stamp button
-  let [stampBtn, setStampBtn] = useState(false);
+  let [isStampBtnActive, setIsStampBtnActive] = useState(false);
   // input value
   let [inputValue, setInputValue] = useState("");
   // book data
@@ -53,7 +58,7 @@ const Main = () => {
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
-  }, [plusBtn, inputValue]);
+  }, [isPlusBtnActive, inputValue]);
   useEffect(() => {
     searchInputRef.current.focus();
   }, [search, searchText]);
@@ -66,7 +71,7 @@ const Main = () => {
       setInputValue("");
       return titleInputRef.current.focus();
     }
-    if (plusBtn) {
+    if (isPlusBtnActive) {
       if (!inputValue) {
         alert("도서를 입력해주세요");
         return titleInputRef.current.focus();
@@ -92,7 +97,7 @@ const Main = () => {
   };
   // input 하단에 띄우기
   const openInput = () => {
-    setPlusBtn(true);
+    setIsPlusBtnActive(true);
     // testWord();
     addBook();
   };
@@ -111,7 +116,7 @@ const Main = () => {
   };
   // listBook.id lncrease
   const increaseId = () => {
-    if (plusBtn) {
+    if (isPlusBtnActive) {
       let copy = bookId;
       copy++;
       setBookId(copy);
@@ -119,17 +124,17 @@ const Main = () => {
   };
   // input close
   const closeInput = () => {
-    setPlusBtn(false);
+    setIsPlusBtnActive(false);
   };
   // 도서 삭제
   // 도서 선택 상태 만들기
   const deleteBefore = () => {
-    setMinusBtn(!minusBtn);
+    setIsMinusBtnActive(!isMinusBtnActive);
     deleteBook();
   };
   //도서 클릭 시 isOn true에서 false 만들기
   const toggleIsOn = (book) => {
-    if (minusBtn) {
+    if (isMinusBtnActive) {
       let copy = [...listBook];
       const mathId = copy.find((el) => el.id === book);
       mathId.isOn = !mathId.isOn;
@@ -138,7 +143,7 @@ const Main = () => {
   };
   //선택한 도서 삭제하기
   const deleteBook = () => {
-    if (minusBtn) {
+    if (isMinusBtnActive) {
       let copy = [...listBook];
       let saveContent = copy.filter((el) => el.isOn === true);
       let deleteContent = copy.filter((el) => el.isOn === false);
@@ -154,11 +159,11 @@ const Main = () => {
   //stamp 찍기
   // stamp 창 열기
   const stamp = () => {
-    setStampBtn(!stampBtn);
+    setIsStampBtnActive(!isStampBtnActive);
   };
   //stamp 붙이기
   const attachStamp = (stamp) => {
-    if (stampBtn) {
+    if (isStampBtnActive) {
       let copy = [...listBook];
       const mathId = copy.find((el) => el.id === stamp);
       mathId.Whether = !mathId.Whether;
@@ -167,7 +172,7 @@ const Main = () => {
   };
   //즐겨찾기
   const bookMark = (mark) => {
-    if (stampBtn === false) {
+    if (isStampBtnActive === false) {
       let copy = [...listBook];
       const mathId = copy.find((el) => el.id === mark);
       mathId.bookMark = !mathId.bookMark;
@@ -185,12 +190,12 @@ const Main = () => {
       content: (
         <Entire
           listBook={listBook}
-          minusBtn={minusBtn}
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
           searchText={searchText}
           searched={searched}
+          navigate={navigate}
         />
       ),
     },
@@ -199,12 +204,12 @@ const Main = () => {
       content: (
         <Bookmark
           listBook={listBook}
-          minusBtn={minusBtn}
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
           searchText={searchText}
           searched={searched}
+          navigate={navigate}
         />
       ),
     },
@@ -213,12 +218,12 @@ const Main = () => {
       content: (
         <Finish
           listBook={listBook}
-          minusBtn={minusBtn}
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
           searchText={searchText}
           searched={searched}
+          navigate={navigate}
         />
       ),
     },
@@ -231,7 +236,6 @@ const Main = () => {
   const getValue = (e) => {
     setSearchText(e.target.value.toLowerCase());
   };
-  //input border css
 
   return (
     <div className="main">
@@ -244,26 +248,28 @@ const Main = () => {
           <div className="icon">
             {" "}
             <FontAwesomeIcon
-              icon={plusBtn ? faCircleCheck : faCirclePlus}
+              icon={isPlusBtnActive ? faCircleCheck : faCirclePlus}
               className={`circlePlus cursor ${
-                minusBtn || stampBtn ? "on" : ""
+                isMinusBtnActive || isStampBtnActive ? "on" : ""
               } `}
               onClick={openInput}
             />
             <FontAwesomeIcon
-              icon={minusBtn ? faSquareCheck : faSquareMinus}
+              icon={isMinusBtnActive ? faSquareCheck : faSquareMinus}
               className={`squareMinus cursor ${
-                plusBtn || stampBtn ? "on" : ""
+                isPlusBtnActive || isStampBtnActive ? "on" : ""
               }`}
               onClick={deleteBefore}
             />{" "}
             <FontAwesomeIcon
-              icon={stampBtn ? faCircleCheck : faStamp}
-              className={`stamp cursor ${plusBtn || minusBtn ? "on" : ""}`}
+              icon={isStampBtnActive ? faCircleCheck : faStamp}
+              className={`stamp cursor ${
+                isPlusBtnActive || isMinusBtnActive ? "on" : ""
+              }`}
               onClick={stamp}
             />
           </div>
-          <div className={`registration ${plusBtn ? "on" : ""}`}>
+          <div className={`registration ${isPlusBtnActive ? "on" : ""}`}>
             <input
               type="text"
               placeholder="읽을 책을 입력하세요"
@@ -299,9 +305,9 @@ const Main = () => {
               {" "}
               <div
                 className={`in ${
-                  plusBtn === false &&
-                  minusBtn === false &&
-                  stampBtn === false &&
+                  isPlusBtnActive === false &&
+                  isMinusBtnActive === false &&
+                  isStampBtnActive === false &&
                   search
                     ? "on"
                     : ""

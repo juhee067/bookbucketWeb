@@ -32,6 +32,10 @@
         line-height: 1.5;
       }
     }
+    .bucket:hover {
+      width: 180px;
+      height: 180px;
+    }
     //책을 읽었을 때 붙이는 스탬프
     .bucket.done::after {
       content: "";

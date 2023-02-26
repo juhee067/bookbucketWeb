@@ -1,0 +1,40 @@
+@import "../../css/colors.scss";
+* {
+  // 배경
+  //   outline: 1px solid $mainT;
+  .impression {
+    .bg {
+      padding: 0;
+
+      .textBox {
+        width: 70%;
+
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        label {
+          color: $subB;
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 50px;
+        }
+        textarea {
+          width: 100%;
+          height: 400px;
+          padding: 30px;
+          box-sizing: border-box;
+          background-color: $mainS;
+          border: none;
+
+          font-size: 16px;
+          resize: none;
+        }
+        .circlePlus {
+          margin: 50px 0;
+          font-size: 3em;
+          color: $mainT;
+        }
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ const Entire = (props) => {
               onClick={() => {
                 props.toggleIsOn(book.id);
                 props.attachStamp(book.id);
+                // props.navigate("/impression");
               }}
             >
               <FontAwesomeIcon

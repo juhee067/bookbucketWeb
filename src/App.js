@@ -7,6 +7,7 @@ import BookSearch from "./pages/BookSearch/BookSearch";
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
+import Impression from "./pages/Impression/Impression";
 
 function App() {
   // 경로 이동
@@ -42,6 +43,9 @@ function App() {
         {" "}
         <Route path="/" element={<Main />}></Route>
         <Route path="/bookSearch" element={<BookSearch />}>
+          {" "}
+        </Route>
+        <Route path="/impression" element={<Impression />}>
           {" "}
         </Route>
         {/* <Route path="*" element={<div>없는 페이지에요</div>}>
