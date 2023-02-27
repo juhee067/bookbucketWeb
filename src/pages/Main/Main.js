@@ -85,7 +85,7 @@ const Main = () => {
       copy.unshift({
         id: bookId,
         title: addInputValue,
-        isOn: true,
+        isClicked: true,
         Whether: false,
         bookMark: false,
       });
@@ -120,25 +120,26 @@ const Main = () => {
   };
   // 도서 삭제
 
-  //도서 클릭 시 isOn true에서 false 만들기
+  //도서 클릭 시 isClicked true에서 false 만들기
   const toggleIsOn = (book) => {
     if (isMinusBtnActive) {
       let copy = [...listBook];
       const mathId = copy.find((el) => el.id === book);
-      mathId.isOn = !mathId.isOn;
+      mathId.isClicked = !mathId.isClicked;
       setListBook(copy);
     }
   };
   //선택한 도서 삭제하기
   const deleteBook = () => {
     setIsMinusBtnActive(!isMinusBtnActive);
+
     if (!isMinusBtnActive) {
       return;
     }
     let copy = [...listBook];
-    let saveContent = [...listBook].filter((el) => el.isOn === true);
+    let saveContent = [...listBook].filter((el) => el.isClicked === true);
     // 선택한 것이 없을 때 alert창을 안띄우기
-
+    console.log(!saveContent.length);
     if (copy.length === saveContent.length) {
       return;
     } else {
@@ -157,7 +158,7 @@ const Main = () => {
   const toggleAttribute = (id, isStampBtnActive) => {
     let copy = [...listBook];
     const mathId = copy.find((el) => el.id === id);
-    console.log(isStampBtnActive);
+
     if (isStampBtnActive) {
       mathId.Whether = !mathId.Whether;
     } else {

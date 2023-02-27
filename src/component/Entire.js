@@ -15,7 +15,7 @@ const Entire = (props) => {
                 key={book.id}
                 className={`bucket cursor img2 center ${
                   props.minusBtn ? "on" : ""
-                } ${book.isOn === false ? "oc" : ""} ${
+                } ${book.isClicked === false ? "oc" : ""} ${
                   book.Whether ? "done" : ""
                 }`}
                 onClick={() => {
