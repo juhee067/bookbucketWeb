@@ -8,17 +8,18 @@ const Bookmark = (props) => {
     return el.bookMark === true;
   });
   let copySearchListBook = [...copyListBook].filter((item) => {
-    return item.title.includes(props.searchText.toLowerCase());
+    return item.title.includes(props.searchInputValue.toLowerCase());
   });
 
   return (
     <div className="bookmark">
       {" "}
       <div className="row flex-row wrap">
-        {(props.searchText ? copySearchListBook : copyListBook).map(
+        {(props.searchInputValue ? copySearchListBook : copyListBook).map(
           (book, i) => {
             return (
               <div
+                key={book.id}
                 className={`bucket cursor img2 center ${
                   props.minusBtn ? "on" : ""
                 } ${book.isOn === false ? "oc" : ""} ${

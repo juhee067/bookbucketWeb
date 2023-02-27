@@ -35,7 +35,7 @@ const Main = () => {
   // stamp button
   let [isStampBtnActive, setIsStampBtnActive] = useState(false);
   // input value
-  let [inputValue, setInputValue] = useState("");
+  let [addInputValue, setAddInputValue] = useState("");
   // book data
   let [listBook, setListBook] = useState(book);
   //book id
@@ -43,14 +43,14 @@ const Main = () => {
   //tab
   let [tab, setTab] = useState(0);
   //search
-  let [search, setSearch] = useState(false);
+  let [isSearchBtn, setIsSearchBtn] = useState(false);
   // input search
-  let [searchText, setSearchText] = useState("");
+  let [searchInputValue, setSearchInputValue] = useState("");
   //search filter
-  const searched = listBook.filter((item) => {
-    return item.title.includes(searchText.toLowerCase());
+  const searchedBookList = listBook.filter((item) => {
+    return item.title.includes(searchInputValue.toLowerCase());
   });
-  console.log(searched);
+
   //------------useref
   const titleInputRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -58,35 +58,40 @@ const Main = () => {
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
-  }, [isPlusBtnActive, inputValue]);
+  }, [isPlusBtnActive, addInputValue]);
   useEffect(() => {
     searchInputRef.current.focus();
-  }, [search, searchText]);
+  }, [isSearchBtn, searchInputValue]);
 
   // --------함수 생성
-  //도서 추가
-  const addBook = () => {
-    if (pattern.test(inputValue)) {
+  // 정규식 테스트
+  const validateInput = () => {
+    if (pattern.test(addInputValue)) {
       alert("자음, 모음만 있는 한글은 처리하지 않습니다");
-      setInputValue("");
+      setAddInputValue("");
       return titleInputRef.current.focus();
     }
-    if (isPlusBtnActive) {
-      if (!inputValue) {
-        alert("도서를 입력해주세요");
-        return titleInputRef.current.focus();
-      }
+    if (!addInputValue) {
+      alert("도서를 입력해주세요");
+      return titleInputRef.current.focus();
+    }
+    return true;
+  };
+  //도서 추가
+  const addBook = () => {
+    setIsPlusBtnActive(true);
+    if (isPlusBtnActive && validateInput()) {
       let copy = [...listBook];
       copy.unshift({
         id: bookId,
-        title: inputValue,
+        title: addInputValue,
         isOn: true,
         Whether: false,
         bookMark: false,
       });
       setListBook(copy);
       increaseId();
-      setInputValue("");
+      setAddInputValue("");
     }
   };
   // 엔터로 도서 추가
@@ -95,25 +100,12 @@ const Main = () => {
       addBook();
     }
   };
-  // input 하단에 띄우기
-  const openInput = () => {
-    setIsPlusBtnActive(true);
-    // testWord();
-    addBook();
-  };
 
   //input value change
   const inputText = (e) => {
-    setInputValue(e.target.value);
+    setAddInputValue(e.target.value);
   };
-  //input value null
-  const clearAllText = () => {
-    setInputValue("");
-  };
-  //input search value null
-  const clearSearchText = () => {
-    setSearchText("");
-  };
+
   // listBook.id lncrease
   const increaseId = () => {
     if (isPlusBtnActive) {
@@ -127,11 +119,7 @@ const Main = () => {
     setIsPlusBtnActive(false);
   };
   // 도서 삭제
-  // 도서 선택 상태 만들기
-  const deleteBefore = () => {
-    setIsMinusBtnActive(!isMinusBtnActive);
-    deleteBook();
-  };
+
   //도서 클릭 시 isOn true에서 false 만들기
   const toggleIsOn = (book) => {
     if (isMinusBtnActive) {
@@ -143,16 +131,19 @@ const Main = () => {
   };
   //선택한 도서 삭제하기
   const deleteBook = () => {
-    if (isMinusBtnActive) {
-      let copy = [...listBook];
-      let saveContent = copy.filter((el) => el.isOn === true);
-      let deleteContent = copy.filter((el) => el.isOn === false);
-      //   선택한 것이 없을 때 alert창을 안띄우기
-      if (deleteContent.length === 0) {
-        return;
-      } else {
+    setIsMinusBtnActive(!isMinusBtnActive);
+    if (!isMinusBtnActive) {
+      return;
+    }
+    let copy = [...listBook];
+    let saveContent = [...listBook].filter((el) => el.isOn === true);
+    // 선택한 것이 없을 때 alert창을 안띄우기
+
+    if (copy.length === saveContent.length) {
+      return;
+    } else {
+      if (window.confirm("정말 삭제하시겠습니까?!")) {
         setListBook(saveContent);
-        alert("정말 삭제하시겠습니까?!");
       }
     }
   };
@@ -161,24 +152,37 @@ const Main = () => {
   const stamp = () => {
     setIsStampBtnActive(!isStampBtnActive);
   };
-  //stamp 붙이기
-  const attachStamp = (stamp) => {
+
+  // stamp & book mark
+  const toggleAttribute = (id, isStampBtnActive) => {
+    let copy = [...listBook];
+    const mathId = copy.find((el) => el.id === id);
+    console.log(isStampBtnActive);
     if (isStampBtnActive) {
-      let copy = [...listBook];
-      const mathId = copy.find((el) => el.id === stamp);
       mathId.Whether = !mathId.Whether;
-      setListBook(copy);
-    }
-  };
-  //즐겨찾기
-  const bookMark = (mark) => {
-    if (isStampBtnActive === false) {
-      let copy = [...listBook];
-      const mathId = copy.find((el) => el.id === mark);
+    } else {
       mathId.bookMark = !mathId.bookMark;
-      setListBook(copy);
     }
+    setListBook(copy);
   };
+  // //stamp 붙이기
+  // const attachStamp = (stamp) => {
+  //   if (isStampBtnActive) {
+  //     let copy = [...listBook];
+  //     const mathId = copy.find((el) => el.id === stamp);
+  //     mathId.Whether = !mathId.Whether;
+  //     setListBook(copy);
+  //   }
+  // };
+  // //즐겨찾기
+  // const bookMark = (mark) => {
+  //   if (isStampBtnActive === false) {
+  //     let copy = [...listBook];
+  //     const mathId = copy.find((el) => el.id === mark);
+  //     mathId.bookMark = !mathId.bookMark;
+  //     setListBook(copy);
+  //   }
+  // };
   //tab 선택
   const selectTab = (index) => {
     setTab(index);
@@ -191,10 +195,9 @@ const Main = () => {
         <Entire
           listBook={listBook}
           toggleIsOn={toggleIsOn}
-          attachStamp={attachStamp}
-          bookMark={bookMark}
-          searchText={searchText}
-          searched={searched}
+          toggleAttribute={toggleAttribute}
+          searchInputValue={searchInputValue}
+          searchedBookList={searchedBookList}
           navigate={navigate}
         />
       ),
@@ -204,11 +207,11 @@ const Main = () => {
       content: (
         <Bookmark
           listBook={listBook}
+          isMinusBtnActive={isMinusBtnActive}
           toggleIsOn={toggleIsOn}
-          attachStamp={attachStamp}
-          bookMark={bookMark}
-          searchText={searchText}
-          searched={searched}
+          toggleAttribute={toggleAttribute}
+          searchInputValue={searchInputValue}
+          searchedBookList={searchedBookList}
           navigate={navigate}
         />
       ),
@@ -219,10 +222,9 @@ const Main = () => {
         <Finish
           listBook={listBook}
           toggleIsOn={toggleIsOn}
-          attachStamp={attachStamp}
-          bookMark={bookMark}
-          searchText={searchText}
-          searched={searched}
+          toggleAttribute={toggleAttribute}
+          searchInputValue={searchInputValue}
+          searchedBookList={searchedBookList}
           navigate={navigate}
         />
       ),
@@ -230,11 +232,11 @@ const Main = () => {
   ];
   //bookSearch
   const searchBook = () => {
-    setSearch(!search);
+    setIsSearchBtn(!isSearchBtn);
   };
   //search text
   const getValue = (e) => {
-    setSearchText(e.target.value.toLowerCase());
+    setSearchInputValue(e.target.value.toLowerCase());
   };
 
   return (
@@ -252,14 +254,14 @@ const Main = () => {
               className={`circlePlus cursor ${
                 isMinusBtnActive || isStampBtnActive ? "on" : ""
               } `}
-              onClick={openInput}
+              onClick={addBook}
             />
             <FontAwesomeIcon
               icon={isMinusBtnActive ? faSquareCheck : faSquareMinus}
               className={`squareMinus cursor ${
                 isPlusBtnActive || isStampBtnActive ? "on" : ""
               }`}
-              onClick={deleteBefore}
+              onClick={deleteBook}
             />{" "}
             <FontAwesomeIcon
               icon={isStampBtnActive ? faCircleCheck : faStamp}
@@ -273,12 +275,12 @@ const Main = () => {
             <input
               type="text"
               placeholder="읽을 책을 입력하세요"
-              value={inputValue}
+              value={addInputValue}
               onChange={(e) => inputText(e)}
               ref={titleInputRef}
               onKeyPress={addEnter}
             />
-            <button className="clearBtn" onClick={clearAllText}>
+            <button className="clearBtn" onClick={() => setAddInputValue("")}>
               {" "}
               <FontAwesomeIcon icon={faEraser} className="faEraser cursor" />
             </button>
@@ -292,6 +294,7 @@ const Main = () => {
               {menuArr.map((el, index) => {
                 return (
                   <li
+                    key={el.name}
                     className={index === tab ? "focused" : ""}
                     onClick={() => selectTab(index)}
                   >
@@ -308,7 +311,7 @@ const Main = () => {
                   isPlusBtnActive === false &&
                   isMinusBtnActive === false &&
                   isStampBtnActive === false &&
-                  search
+                  isSearchBtn
                     ? "on"
                     : ""
                 }`}
@@ -316,13 +319,16 @@ const Main = () => {
                 <input
                   type="text"
                   placeholder="책을 검색하세요"
-                  value={searchText}
+                  value={searchInputValue}
                   onChange={(e) => getValue(e)}
                   ref={searchInputRef}
                   onKeyPress={addEnter}
                   className="searchInput"
                 />
-                <button className="clearBtn" onClick={clearSearchText}>
+                <button
+                  className="clearBtn"
+                  onClick={() => setSearchInputValue("")}
+                >
                   {" "}
                   <FontAwesomeIcon
                     icon={faEraser}

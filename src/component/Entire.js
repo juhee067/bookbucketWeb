@@ -8,32 +8,36 @@ const Entire = (props) => {
     <div className="entire">
       {" "}
       <div className="row flex-row wrap">
-        {(props.searchText ? props.searched : props.listBook).map((book, i) => {
-          return (
-            <div
-              className={`bucket cursor img2 center ${
-                props.minusBtn ? "on" : ""
-              } ${book.isOn === false ? "oc" : ""} ${
-                book.Whether ? "done" : ""
-              }`}
-              onClick={() => {
-                props.toggleIsOn(book.id);
-                props.attachStamp(book.id);
-                // props.navigate("/impression");
-              }}
-            >
-              <FontAwesomeIcon
-                icon={book.bookMark ? solidStar : regularStar}
-                className="fastar cursor"
+        {(props.searchInputValue ? props.searchedBookList : props.listBook).map(
+          (book, i) => {
+            return (
+              <div
+                key={book.id}
+                className={`bucket cursor img2 center ${
+                  props.minusBtn ? "on" : ""
+                } ${book.isOn === false ? "oc" : ""} ${
+                  book.Whether ? "done" : ""
+                }`}
                 onClick={() => {
-                  props.bookMark(book.id);
+                  props.toggleIsOn(book.id);
+                  props.toggleAttribute(book.id, props.isStampBtnActive);
+                  // props.navigate("/impression");
+                  //  console.log(props.isStampBtnActive);
                 }}
-              />
+              >
+                <FontAwesomeIcon
+                  icon={book.bookMark ? solidStar : regularStar}
+                  className="fastar cursor"
+                  onClick={() => {
+                    props.toggleAttribute(book.id, false);
+                  }}
+                />
 
-              <h4>{book.title}</h4>
-            </div>
-          );
-        })}
+                <h4>{book.title}</h4>
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
