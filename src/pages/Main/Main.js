@@ -155,10 +155,10 @@ const Main = () => {
   };
 
   // stamp & book mark
-  const toggleAttribute = (id, isStampBtnActive) => {
+  const toggleAttribute = (id) => {
     let copy = [...listBook];
     const mathId = copy.find((el) => el.id === id);
-
+    console.log(isStampBtnActive);
     if (isStampBtnActive) {
       mathId.Whether = !mathId.Whether;
     } else {
