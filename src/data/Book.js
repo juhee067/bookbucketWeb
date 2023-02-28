@@ -1,25 +1,31 @@
 let book = [
-  { id: 0, title: "역행자", isClicked: true, Whether: false, bookMark: false },
+  {
+    id: 0,
+    title: "역행자",
+    isClicked: true,
+    isStamp: false,
+    isBookMark: false,
+  },
   {
     id: 1,
     title: "불편한 편의점1",
     isClicked: true,
-    Whether: false,
-    bookMark: false,
+    isStamp: false,
+    isBookMark: false,
   },
   {
     id: 2,
     title: "트렌드 코리아 2023",
     isClicked: true,
-    Whether: false,
-    bookMark: false,
+    isStamp: false,
+    isBookMark: false,
   },
   {
     id: 3,
     title: "완전한 행복",
     isClicked: true,
-    Whether: false,
-    bookMark: false,
+    isStamp: false,
+    isBookMark: false,
   },
 
   // { id: 4, title: "모르면 호구 되는 경제상식" },

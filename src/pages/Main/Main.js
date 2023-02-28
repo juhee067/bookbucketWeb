@@ -77,23 +77,31 @@ const Main = () => {
     }
     return true;
   };
+  //도서 추가 text 창 띄우기
+  const addBookOpenInput = () => {
+    setIsPlusBtnActive(true);
+    if (isSearchBtn) {
+      setIsSearchBtn(!isSearchBtn);
+    }
+  };
   //도서 추가
   const addBook = () => {
-    setIsPlusBtnActive(true);
+    addBookOpenInput();
     if (isPlusBtnActive && validateInput()) {
       let copy = [...listBook];
       copy.unshift({
         id: bookId,
         title: addInputValue,
         isClicked: true,
-        Whether: false,
-        bookMark: false,
+        isStamp: false,
+        isBookMark: false,
       });
       setListBook(copy);
       increaseId();
       setAddInputValue("");
     }
   };
+
   // 엔터로 도서 추가
   const addEnter = () => {
     if (window.event.keyCode === 13) {
@@ -159,12 +167,12 @@ const Main = () => {
   //   let copy = [...listBook];
   //   const mathId = copy.find((el) => el.id === id);
 
-  //   if (attribute === "bookMark") {
-  //     mathId.bookMark = !mathId.bookMark;
-  //   } else if (attribute === "Whether") {
-  //     mathId.Whether = !mathId.Whether;
+  //   if (attribute === "isBookMark") {
+  //     mathId.isBookMark = !mathId.isBookMark;
+  //   } else if (attribute === "isStamp") {
+  //     mathId.isStamp = !mathId.isStamp;
   //   }
-  //   //  mathId.bookMark = !mathId.bookMark;
+  //   //  mathId.isBookMark = !mathId.isBookMark;
 
   //   setListBook(copy);
   // };
@@ -227,6 +235,9 @@ const Main = () => {
   ];
   //bookSearch
   const searchBook = () => {
+    if (isPlusBtnActive) {
+      setIsPlusBtnActive(!isPlusBtnActive);
+    }
     setIsSearchBtn(!isSearchBtn);
   };
   //search text

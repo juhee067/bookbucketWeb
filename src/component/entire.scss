@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     .bucket {
+      padding: 0 10px;
       position: relative;
       width: 160px;
       height: 160px;
@@ -15,7 +16,7 @@
       font-weight: bold;
       font-size: 16px;
       text-align: center;
-      word-break: keep-all;
+      word-break: break-all;
       z-index: 0;
       // 즐겨찾기 아이콘
       .fastar {

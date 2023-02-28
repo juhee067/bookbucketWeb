@@ -23,7 +23,7 @@ const Bookmark = (props) => {
                 className={`bucket cursor img2 center ${
                   props.minusBtn ? "on" : ""
                 } ${book.isOn === false ? "oc" : ""} ${
-                  book.Whether ? "done" : ""
+                  book.isStamp ? "done" : ""
                 }`}
                 onClick={() => {
                   props.toggleIsOn(book.id);
@@ -31,7 +31,7 @@ const Bookmark = (props) => {
                 }}
               >
                 <FontAwesomeIcon
-                  icon={book.bookMark ? solidStar : regularStar}
+                  icon={book.isBookMark ? solidStar : regularStar}
                   className="fastar cursor"
                   onClick={() => {
                     props.bookMark(book.id);
