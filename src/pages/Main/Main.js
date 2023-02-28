@@ -155,35 +155,29 @@ const Main = () => {
   };
 
   // stamp & book mark
-  const toggleAttribute = (id) => {
+  // const toggleAttribute = (id, attribute) => {
+  //   let copy = [...listBook];
+  //   const mathId = copy.find((el) => el.id === id);
+
+  //   if (attribute === "bookMark") {
+  //     mathId.bookMark = !mathId.bookMark;
+  //   } else if (attribute === "Whether") {
+  //     mathId.Whether = !mathId.Whether;
+  //   }
+  //   //  mathId.bookMark = !mathId.bookMark;
+
+  //   setListBook(copy);
+  // };
+
+  //영한 오빠
+  const toggleAttribute = (id, attribute) => {
     let copy = [...listBook];
     const mathId = copy.find((el) => el.id === id);
-    console.log(isStampBtnActive);
-    if (isStampBtnActive) {
-      mathId.Whether = !mathId.Whether;
-    } else {
-      mathId.bookMark = !mathId.bookMark;
-    }
+    mathId[attribute] = !mathId[attribute];
     setListBook(copy);
   };
-  // //stamp 붙이기
-  // const attachStamp = (stamp) => {
-  //   if (isStampBtnActive) {
-  //     let copy = [...listBook];
-  //     const mathId = copy.find((el) => el.id === stamp);
-  //     mathId.Whether = !mathId.Whether;
-  //     setListBook(copy);
-  //   }
   // };
-  // //즐겨찾기
-  // const bookMark = (mark) => {
-  //   if (isStampBtnActive === false) {
-  //     let copy = [...listBook];
-  //     const mathId = copy.find((el) => el.id === mark);
-  //     mathId.bookMark = !mathId.bookMark;
-  //     setListBook(copy);
-  //   }
-  // };
+
   //tab 선택
   const selectTab = (index) => {
     setTab(index);
@@ -281,7 +275,13 @@ const Main = () => {
               ref={titleInputRef}
               onKeyPress={addEnter}
             />
-            <button className="clearBtn" onClick={() => setAddInputValue("")}>
+            <button
+              className="clearBtn"
+              onClick={() => {
+                setAddInputValue("");
+                titleInputRef.current.focus();
+              }}
+            >
               {" "}
               <FontAwesomeIcon icon={faEraser} className="faEraser cursor" />
             </button>
@@ -328,7 +328,10 @@ const Main = () => {
                 />
                 <button
                   className="clearBtn"
-                  onClick={() => setSearchInputValue("")}
+                  onClick={() => {
+                    setSearchInputValue("");
+                    searchInputRef.current.focus();
+                  }}
                 >
                   {" "}
                   <FontAwesomeIcon

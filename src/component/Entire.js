@@ -15,21 +15,23 @@ const Entire = (props) => {
                 key={book.id}
                 className={`bucket cursor img2 center ${
                   props.minusBtn ? "on" : ""
-                } ${book.isClicked === false ? "oc" : ""} ${
+                } ${book.isOn === false ? "oc" : ""} ${
                   book.Whether ? "done" : ""
                 }`}
                 onClick={() => {
                   props.toggleIsOn(book.id);
-                  props.toggleAttribute(book.id, props.isStampBtnActive);
+                  if (props.isStampBtnActive)
+                    props.toggleAttribute(book.id, "Whether");
+
                   // props.navigate("/impression");
-                  //  console.log(props.isStampBtnActive);
                 }}
               >
                 <FontAwesomeIcon
                   icon={book.bookMark ? solidStar : regularStar}
                   className="fastar cursor"
                   onClick={() => {
-                    props.toggleAttribute(book.id, false);
+                    if (!props.isStampBtnActive)
+                      props.toggleAttribute(book.id, "bookMark");
                   }}
                 />
 
