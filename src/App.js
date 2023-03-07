@@ -3,42 +3,14 @@ import "./css/reset.css";
 import "./css/common.scss";
 import Main from "./pages/Main/Main";
 import BookSearch from "./pages/BookSearch/BookSearch";
+import Header from "./component/Header";
 
-// fontawesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook } from "@fortawesome/free-solid-svg-icons";
 import Impression from "./pages/Impression/Impression";
 
 function App() {
-  // 경로 이동
-  let navigate = useNavigate();
-
   return (
     <div className="App">
-      {" "}
-      <div className="bg center">
-        <div className="container">
-          <h1 className="title">
-            <span
-              className="cursor"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              2023 독서 계획
-            </span>
-            <button>
-              <FontAwesomeIcon
-                icon={faBook}
-                className="bookIcon cursor"
-                onClick={() => {
-                  navigate("/bookSearch");
-                }}
-              />
-            </button>
-          </h1>
-        </div>
-      </div>
+      <Header />
       <Routes>
         {" "}
         <Route path="/" element={<Main />}></Route>

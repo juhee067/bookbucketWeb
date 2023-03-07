@@ -80,6 +80,7 @@ const Main = () => {
   //도서 추가 text 창 띄우기
   const addBookOpenInput = () => {
     setIsPlusBtnActive(true);
+    // 도서 추가 인풋 열렸을 때 검색창 누르면 검색창 상태값 변경
     if (isSearchBtn) {
       setIsSearchBtn(!isSearchBtn);
     }
