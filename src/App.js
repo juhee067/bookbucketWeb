@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./css/reset.css";
 import "./css/common.scss";
 import Main from "./pages/Main/Main";
@@ -20,9 +20,6 @@ function App() {
         <Route path="/impression" element={<Impression />}>
           {" "}
         </Route>
-        {/* <Route path="*" element={<div>없는 페이지에요</div>}>
-          {" "}
-        </Route> */}
       </Routes>{" "}
     </div>
   );

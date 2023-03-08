@@ -162,7 +162,22 @@ const Main = () => {
   const stamp = () => {
     setIsStampBtnActive(!isStampBtnActive);
   };
-
+  const attachStamp = (stamp) => {
+    if (isStampBtnActive) {
+      let copy = [...listBook];
+      const mathId = copy.find((el) => el.id === stamp);
+      mathId.isStamp = !mathId.isStamp;
+      setListBook(copy);
+    }
+  };
+  const bookMark = (mark) => {
+    if (isStampBtnActive === false) {
+      let copy = [...listBook];
+      const mathId = copy.find((el) => el.id === mark);
+      mathId.isBookMark = !mathId.isBookMark;
+      setListBook(copy);
+    }
+  };
   // stamp & book mark
   // const toggleAttribute = (id, attribute) => {
   //   let copy = [...listBook];
@@ -197,7 +212,10 @@ const Main = () => {
       name: "전체보기",
       content: (
         <Entire
+          attachStamp={attachStamp}
+          bookMark={bookMark}
           listBook={listBook}
+          isMinusBtnActive={isMinusBtnActive}
           toggleIsOn={toggleIsOn}
           toggleAttribute={toggleAttribute}
           searchInputValue={searchInputValue}
@@ -210,6 +228,8 @@ const Main = () => {
       name: "즐겨찾기",
       content: (
         <Bookmark
+          attachStamp={attachStamp}
+          bookMark={bookMark}
           listBook={listBook}
           isMinusBtnActive={isMinusBtnActive}
           toggleIsOn={toggleIsOn}
@@ -224,6 +244,8 @@ const Main = () => {
       name: "독서완료",
       content: (
         <Finish
+          attachStamp={attachStamp}
+          bookMark={bookMark}
           listBook={listBook}
           toggleIsOn={toggleIsOn}
           toggleAttribute={toggleAttribute}

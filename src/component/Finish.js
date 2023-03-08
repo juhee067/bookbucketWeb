@@ -5,7 +5,7 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import "./Entire";
 const Finish = (props) => {
   let copyListBook = [...props.listBook].filter((el) => {
-    return el.Whether === true;
+    return el.isStamp === true;
   });
   let copySearchListBook = [...copyListBook].filter((item) => {
     return item.title.includes(props.searchInputValue.toLowerCase());
@@ -20,8 +20,8 @@ const Finish = (props) => {
               <div
                 key={book.id}
                 className={`bucket cursor img2 center ${
-                  props.minusBtn ? "on" : ""
-                } ${book.isOn === false ? "oc" : ""} ${
+                  props.isMinusBtnActive ? "on" : ""
+                } ${book.isClicked === false ? "oc" : ""} ${
                   book.isStamp ? "done" : ""
                 }`}
                 onClick={() => {

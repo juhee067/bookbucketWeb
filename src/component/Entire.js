@@ -14,14 +14,13 @@ const Entire = (props) => {
               <div
                 key={book.id}
                 className={`bucket cursor img2 center ${
-                  props.minusBtn ? "on" : ""
-                } ${book.isOn === false ? "oc" : ""} ${
+                  props.isMinusBtnActive ? "on" : ""
+                } ${book.isClicked === false ? "oc" : ""} ${
                   book.isStamp ? "done" : ""
                 }`}
                 onClick={() => {
                   props.toggleIsOn(book.id);
-                  if (props.isStampBtnActive)
-                    props.toggleAttribute(book.id, "isStamp");
+                  props.attachStamp(book.id);
 
                   // props.navigate("/impression");
                 }}
@@ -30,8 +29,7 @@ const Entire = (props) => {
                   icon={book.isBookMark ? solidStar : regularStar}
                   className="fastar cursor"
                   onClick={() => {
-                    if (!props.isStampBtnActive)
-                      props.toggleAttribute(book.id, "isBookMark");
+                    props.bookMark(book.id);
                   }}
                 />
 
