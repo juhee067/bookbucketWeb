@@ -1,8 +1,9 @@
+
 {
   "name": "bookbucketweb",
   "version": "0.1.0",
   "private": true,  
-  "homepage": "https://juhee067.github.io/bookbucketWeb/",
+
   "dependencies": {
   
     "@fortawesome/free-regular-svg-icons": "^6.3.0",

@@ -54,6 +54,7 @@ const Main = () => {
   //------------useref
   const titleInputRef = useRef(null);
   const searchInputRef = useRef(null);
+
   // ---------------------useEffect
   // input focus
   useEffect(() => {
@@ -77,6 +78,7 @@ const Main = () => {
     }
     return true;
   };
+
   //도서 추가 text 창 띄우기
   const addBookOpenInput = () => {
     setIsPlusBtnActive(true);
@@ -85,6 +87,7 @@ const Main = () => {
       setIsSearchBtn(!isSearchBtn);
     }
   };
+
   //도서 추가
   const addBook = () => {
     addBookOpenInput();
@@ -141,7 +144,9 @@ const Main = () => {
   //선택한 도서 삭제하기
   const deleteBook = () => {
     setIsMinusBtnActive(!isMinusBtnActive);
-
+    if (isMinusBtnActive) {
+      setIsSearchBtn(!isSearchBtn);
+    }
     if (!isMinusBtnActive) {
       return;
     }
@@ -161,6 +166,9 @@ const Main = () => {
   // stamp 창 열기
   const stamp = () => {
     setIsStampBtnActive(!isStampBtnActive);
+    if (isStampBtnActive) {
+      setIsSearchBtn(!isSearchBtn);
+    }
   };
   const attachStamp = (stamp) => {
     if (isStampBtnActive) {
@@ -170,6 +178,9 @@ const Main = () => {
       setListBook(copy);
     }
   };
+  // 글쓰기 btn
+
+  // bookmark
   const bookMark = (mark) => {
     if (isStampBtnActive === false) {
       let copy = [...listBook];
@@ -261,6 +272,12 @@ const Main = () => {
     if (isPlusBtnActive) {
       setIsPlusBtnActive(!isPlusBtnActive);
     }
+    if (isMinusBtnActive) {
+      setIsMinusBtnActive(!isMinusBtnActive);
+    }
+    if (isStampBtnActive) {
+      setIsStampBtnActive(!isStampBtnActive);
+    }
     setIsSearchBtn(!isSearchBtn);
   };
   //search text
@@ -280,23 +297,17 @@ const Main = () => {
             {" "}
             <FontAwesomeIcon
               icon={isPlusBtnActive ? faCircleCheck : faCirclePlus}
-              className={`circlePlus cursor ${
-                isMinusBtnActive || isStampBtnActive ? "on" : ""
-              } `}
+              className={`circlePlus cursor ${isMinusBtnActive || isStampBtnActive ? "on" : ""} `}
               onClick={addBook}
             />
             <FontAwesomeIcon
               icon={isMinusBtnActive ? faSquareCheck : faSquareMinus}
-              className={`squareMinus cursor ${
-                isPlusBtnActive || isStampBtnActive ? "on" : ""
-              }`}
+              className={`squareMinus cursor ${isPlusBtnActive || isStampBtnActive ? "on" : ""}`}
               onClick={deleteBook}
             />{" "}
             <FontAwesomeIcon
               icon={isStampBtnActive ? faCircleCheck : faStamp}
-              className={`stamp cursor ${
-                isPlusBtnActive || isMinusBtnActive ? "on" : ""
-              }`}
+              className={`stamp cursor ${isPlusBtnActive || isMinusBtnActive ? "on" : ""}`}
               onClick={stamp}
             />
           </div>
@@ -368,10 +379,7 @@ const Main = () => {
                   }}
                 >
                   {" "}
-                  <FontAwesomeIcon
-                    icon={faEraser}
-                    className="faEraser cursor"
-                  />
+                  <FontAwesomeIcon icon={faEraser} className="faEraser cursor" />
                 </button>
               </div>
               <FontAwesomeIcon

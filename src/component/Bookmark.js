@@ -18,27 +18,37 @@ const Bookmark = (props) => {
         {(props.searchInputValue ? copySearchListBook : copyListBook).map(
           (book, i) => {
             return (
-              <div
-                key={book.id}
-                className={`bucket cursor img2 center ${
-                  props.isMinusBtnActive ? "on" : ""
-                } ${book.isClicked === false ? "oc" : ""} ${
-                  book.isStamp ? "done" : ""
-                }`}
-                onClick={() => {
-                  props.toggleIsOn(book.id);
-                  props.attachStamp(book.id);
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={book.isBookMark ? solidStar : regularStar}
-                  className="fastar cursor"
+              <div className="content" key={book.id}>
+                {" "}
+                <div
+                  className={`bucket cursor img2 center ${
+                    props.isMinusBtnActive ? "on" : ""
+                  } ${book.isClicked === false ? "oc" : ""} ${
+                    book.isStamp ? "done" : ""
+                  }`}
                   onClick={() => {
-                    props.bookMark(book.id);
+                    props.toggleIsOn(book.id);
+                    props.attachStamp(book.id);
                   }}
-                />
+                >
+                  <FontAwesomeIcon
+                    icon={book.isBookMark ? solidStar : regularStar}
+                    className="fastar cursor"
+                    onClick={() => {
+                      props.bookMark(book.id);
+                    }}
+                  />
 
-                <h4>{book.title}</h4>
+                  <h4>{book.title}</h4>
+                </div>
+                <button
+                  className={`finishWrite ${book.isStamp ? "active" : ""}`}
+                  onClick={() => {
+                    props.navigate("/impression");
+                  }}
+                >
+                  글쓰기
+                </button>
               </div>
             );
           }

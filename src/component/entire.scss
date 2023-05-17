@@ -6,12 +6,14 @@
   .flex-row {
     display: flex;
     justify-content: center;
+
     .bucket {
       padding: 0 10px;
       position: relative;
       width: 160px;
       height: 160px;
       margin: 8px;
+      margin-bottom: 20px;
       /* 내용 글씨관련 */
       font-weight: bold;
       font-size: 16px;
@@ -64,6 +66,23 @@
     .center.oc {
       opacity: 50%;
       filter: grayscale(80%);
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .finishWrite {
+        display: none;
+        background-color: $mainT;
+        padding: 10px 15px 9px 15px;
+        color: $subW;
+        cursor: pointer;
+        width: 50%;
+      }
+      .finishWrite.active {
+        display: block;
+      }
     }
   }
   .wrap {
