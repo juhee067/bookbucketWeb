@@ -62,6 +62,9 @@ const Main = () => {
   }, [isPlusBtnActive, addInputValue]);
   useEffect(() => {
     searchInputRef.current.focus();
+    if (!isSearchBtn) {
+      setSearchInputValue("");
+    }
   }, [isSearchBtn, searchInputValue]);
 
   // --------함수 생성
@@ -281,9 +284,7 @@ const Main = () => {
     if (isStampBtnActive) {
       setIsStampBtnActive(!isStampBtnActive);
     }
-    if (!isSearchBtn) {
-      setSearchInputValue("");
-    }
+
     setIsSearchBtn(!isSearchBtn);
   };
   //search text
