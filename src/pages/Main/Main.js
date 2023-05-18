@@ -104,6 +104,9 @@ const Main = () => {
       increaseId();
       setAddInputValue("");
     }
+    if (!isPlusBtnActive) {
+      setAddInputValue("");
+    }
   };
 
   // 엔터로 도서 추가
@@ -277,6 +280,9 @@ const Main = () => {
     }
     if (isStampBtnActive) {
       setIsStampBtnActive(!isStampBtnActive);
+    }
+    if (!isSearchBtn) {
+      setSearchInputValue("");
     }
     setIsSearchBtn(!isSearchBtn);
   };
