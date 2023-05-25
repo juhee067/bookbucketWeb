@@ -151,7 +151,7 @@ const Main = () => {
   const deleteBook = () => {
     setIsMinusBtnActive(!isMinusBtnActive);
     if (isMinusBtnActive) {
-      setIsSearchBtn(!isSearchBtn);
+      setIsSearchBtn(false);
     }
     if (!isMinusBtnActive) {
       return;
@@ -173,7 +173,7 @@ const Main = () => {
   const stamp = () => {
     setIsStampBtnActive(!isStampBtnActive);
     if (isStampBtnActive) {
-      setIsSearchBtn(!isSearchBtn);
+      setIsSearchBtn(false);
     }
   };
   const attachStamp = (stamp) => {
