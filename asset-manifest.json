@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/bookbucketWeb/static/css/main.d676d8c6.css",
-    "main.js": "/bookbucketWeb/static/js/main.0b7ed1b2.js",
-    "static/media/stamp.png": "/bookbucketWeb/static/media/stamp.05e65a1b989a6f5c1b7d.png",
-    "index.html": "/bookbucketWeb/index.html",
-    "main.d676d8c6.css.map": "/bookbucketWeb/static/css/main.d676d8c6.css.map",
-    "main.0b7ed1b2.js.map": "/bookbucketWeb/static/js/main.0b7ed1b2.js.map"
+    "main.css": "/static/css/main.a877b5f2.css",
+    "main.js": "/static/js/main.0b812c8d.js",
+    "static/media/stamp.png": "/static/media/stamp.05e65a1b989a6f5c1b7d.png",
+    "index.html": "/index.html",
+    "main.a877b5f2.css.map": "/static/css/main.a877b5f2.css.map",
+    "main.0b812c8d.js.map": "/static/js/main.0b812c8d.js.map"
   },
   "entrypoints": [
-    "static/css/main.d676d8c6.css",
-    "static/js/main.0b7ed1b2.js"
+    "static/css/main.a877b5f2.css",
+    "static/js/main.0b812c8d.js"
   ]
 }
